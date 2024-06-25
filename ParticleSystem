@@ -1,0 +1,38 @@
+class ParticleSystem {
+  Particle[] particles;
+  int[] waitingParticles;
+  int waitingParticlesTail;
+
+  ParticleSystem(int size) {
+    particles = new Particle[size];
+    waitingParticles = new int[size];
+    for (int i=0; i<size; i++) {
+      particles[i] = new Particle();
+      waitingParticles[i] = i;
+    }
+    waitingParticlesTail = size;
+  }
+
+  boolean addParticle(int x, int y) {
+    if (waitingParticlesTail <= 0) {
+      return false;
+    }
+    waitingParticlesTail--;
+    int id = waitingParticles[waitingParticlesTail];
+    particles[id].activate(x, y);
+
+    return true;
+  }
+
+  void run() {
+    waitingParticlesTail = 0;
+    for (int i=0; i<particles.length; i++) {
+      if (!particles[i].isDead()) {
+        particles[i].run();
+      } else {
+        waitingParticles[waitingParticlesTail] = i;
+        waitingParticlesTail++;
+      }
+    }
+  }
+}
