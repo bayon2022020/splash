@@ -1,1 +1,5 @@
-成果物のソースコードはsplashファイル内にある「Particle,Spalash,ParticleSystem」を参照してください。
+成果物のソースコードはsplashファイル内にある
+Particle
+Spalash
+ParticleSystem
+を参照してください。
